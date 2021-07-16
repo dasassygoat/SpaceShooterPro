@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private float _speedzValue = 3.5f;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -11,11 +15,37 @@ public class Player : MonoBehaviour
 
         transform.position = startingPosition;
 
+        
+
     }
 
-    // Update is called once per frame
+        // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * 5 * Time.deltaTime);
+        CalculateMovement();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space key pressed");
+        }
+    }
+
+
+    void CalculateMovement()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        //horizontal move
+        transform.Translate(Vector3.left * horizontalInput * _speedzValue * Time.deltaTime);
+
+
+        //vertical move, I like to see the box move, not the screen
+        transform.Translate(Vector3.down * verticalInput * _speedzValue * Time.deltaTime);
+
+        if (transform.position.y > 1)
+        {
+            transform.position = Vector3.zero;
+        }
     }
 }
