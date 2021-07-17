@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speedzValue = 3.5f;
 
+    [SerializeField]
+    private GameObject _laserPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space key pressed");
+            Instantiate(_laserPrefab);
         }
     }
 
