@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject _laserPrefab;
+    
+    [SerializeField]
+    private float _fireRate = 0.150f;
+
+    private float nextFire = 0.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -28,8 +34,16 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space key pressed");
-            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+            if (Time.time > nextFire)
+            {
+                
+                nextFire = Time.time + _fireRate;
+                Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.Log("too soon");
+            }
         }
     }
 
