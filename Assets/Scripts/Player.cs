@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space key pressed");
-            Instantiate(_laserPrefab);
+            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
         }
     }
 
@@ -40,11 +40,11 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         //horizontal move
-        transform.Translate(Vector3.left * horizontalInput * _speedzValue * Time.deltaTime);
+        transform.Translate(Vector3.right * horizontalInput * _speedzValue * Time.deltaTime);
 
 
         //vertical move, I like to see the box move, not the screen
-        transform.Translate(Vector3.down * verticalInput * _speedzValue * Time.deltaTime);
+        transform.Translate(Vector3.up * verticalInput * _speedzValue * Time.deltaTime);
 
         if (transform.position.y > 1)
         {
